@@ -9,15 +9,15 @@ import java.io.Serial;
 import java.io.Serializable;
 
 /**
- * 用户信息表
+ * 短链接分组表
  *
  * @author YangTing
- * @since 2026/1/19 9:18
+ * @since 2026/1/26 20:12
  */
 @Data
-@TableName("user")
+@TableName("group")
 @EqualsAndHashCode(callSuper = true)
-public class UserDO extends BaseDO implements Serializable {
+public class GroupDO extends BaseDO implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -28,32 +28,22 @@ public class UserDO extends BaseDO implements Serializable {
     private Long id;
 
     /**
-     * 用户名
+     * 分组标识
+     */
+    private String gid;
+
+    /**
+     * 分组名称
+     */
+    private String name;
+
+    /**
+     * 创建分组用户名
      */
     private String username;
 
     /**
-     * 密码
+     * 分组排序
      */
-    private String password;
-
-    /**
-     * 真实姓名
-     */
-    private String realName;
-
-    /**
-     * 手机号
-     */
-    private String phone;
-
-    /**
-     * 邮箱
-     */
-    private String mail;
-
-    /**
-     * 注销时间戳
-     */
-    private Long deletionTime;
+    private Integer sortOrder;
 }
