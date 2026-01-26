@@ -2,8 +2,7 @@ package com.yang.shortlink.admin.dao.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.yang.shortlink.admin.common.database.BaseDO;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -15,8 +14,11 @@ import java.io.Serializable;
  * @since 2026/1/26 20:12
  */
 @Data
-@TableName("group")
+@TableName("`group`")
 @EqualsAndHashCode(callSuper = true)
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class GroupDO extends BaseDO implements Serializable {
 
     @Serial
