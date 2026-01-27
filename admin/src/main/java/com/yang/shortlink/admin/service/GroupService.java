@@ -3,6 +3,9 @@ package com.yang.shortlink.admin.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.yang.shortlink.admin.dao.entity.GroupDO;
 import com.yang.shortlink.admin.dto.req.GroupSaveReqDTO;
+import com.yang.shortlink.admin.dto.resp.GroupListRespDTO;
+
+import java.util.List;
 
 /**
  * 短链接分组Service层
@@ -19,4 +22,10 @@ public interface GroupService extends IService<GroupDO> {
      */
     void saveGroup(GroupSaveReqDTO requestParam);
 
+    /**
+     * 短链接分组列表
+     *
+     * @return 短链接分组列表返回参数
+     */
+    List<GroupListRespDTO> listGroup();
 }

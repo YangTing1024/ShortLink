@@ -3,12 +3,12 @@ package com.yang.shortlink.admin.controller;
 import com.yang.shortlink.admin.common.convention.Result;
 import com.yang.shortlink.admin.common.convention.Results;
 import com.yang.shortlink.admin.dto.req.GroupSaveReqDTO;
+import com.yang.shortlink.admin.dto.resp.GroupListRespDTO;
 import com.yang.shortlink.admin.service.GroupService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 短链接分组控制层
@@ -30,5 +30,13 @@ public class GroupController {
     public Result<Void> saveGroup(@RequestBody GroupSaveReqDTO requestParam) {
         groupService.saveGroup(requestParam);
         return Results.success();
+    }
+
+    /**
+     * 短链接分组列表
+     */
+    @GetMapping("/list")
+    public Result<List<GroupListRespDTO>> listGroup(){
+        return Results.success(groupService.listGroup());
     }
 }
