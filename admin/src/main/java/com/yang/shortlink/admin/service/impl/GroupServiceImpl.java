@@ -4,6 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.yang.shortlink.admin.common.biz.user.UserContext;
 import com.yang.shortlink.admin.dao.entity.GroupDO;
 import com.yang.shortlink.admin.dao.mapper.GroupMapper;
 import com.yang.shortlink.admin.dto.req.GroupSaveReqDTO;
@@ -32,6 +33,7 @@ public class GroupServiceImpl extends ServiceImpl<GroupMapper, GroupDO> implemen
         }while (hasGroup(gid));
         GroupDO groupDO = GroupDO.builder()
                 .gid(gid)
+                .username(UserContext.getUsername())
                 .name(requestParam.getName())
                 .sortOrder(0)
                 .build();
@@ -41,8 +43,7 @@ public class GroupServiceImpl extends ServiceImpl<GroupMapper, GroupDO> implemen
     private boolean hasGroup(String gid) {
         LambdaQueryWrapper<GroupDO> queryWrapper = Wrappers.lambdaQuery(GroupDO.class)
                 .eq(GroupDO::getGid, gid)
-                // TODO 从上下文获取用户名
-                .eq(GroupDO::getUsername, null);
+                .eq(GroupDO::getUsername, UserContext.getUsername());
         GroupDO groupDO = baseMapper.selectOne(queryWrapper);
         return  groupDO != null;
     }
@@ -50,8 +51,7 @@ public class GroupServiceImpl extends ServiceImpl<GroupMapper, GroupDO> implemen
     @Override
     public List<GroupListRespDTO> listGroup() {
         LambdaQueryWrapper<GroupDO> queryWrapper = Wrappers.lambdaQuery(GroupDO.class)
-                // TODO 从当前上下文获取用户名
-//                .eq(GroupDO::getUsername, null)
+                .eq(GroupDO::getUsername, UserContext.getUsername())
                 .eq(GroupDO::getDelFlag, 0)
                 .orderByDesc(List.of(GroupDO::getSortOrder, GroupDO::getUpdateTime));
         List<GroupDO> groupDOList = baseMapper.selectList(queryWrapper);
