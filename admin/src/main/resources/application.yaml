@@ -11,3 +11,9 @@ spring:
     redis:
       host: 127.0.0.1
       port: 6379
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-field: delFlag  # 全局逻辑删除字段名
+      logic-delete-value: 1        # 删除后的值
+      logic-not-delete-value: 0    # 未删除的值
