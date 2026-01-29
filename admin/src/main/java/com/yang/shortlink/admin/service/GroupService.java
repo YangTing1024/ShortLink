@@ -3,6 +3,7 @@ package com.yang.shortlink.admin.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.yang.shortlink.admin.dao.entity.GroupDO;
 import com.yang.shortlink.admin.dto.req.GroupSaveReqDTO;
+import com.yang.shortlink.admin.dto.req.GroupSortReqDTO;
 import com.yang.shortlink.admin.dto.req.GroupUpdateReqDTO;
 import com.yang.shortlink.admin.dto.resp.GroupListRespDTO;
 
@@ -43,4 +44,6 @@ public interface GroupService extends IService<GroupDO> {
      * @param gid gid
      */
     void deleteGroup(String gid);
+
+    void sortGroup(List<GroupSortReqDTO> requestParam);
 }

@@ -9,6 +9,7 @@ import com.yang.shortlink.admin.common.biz.user.UserContext;
 import com.yang.shortlink.admin.dao.entity.GroupDO;
 import com.yang.shortlink.admin.dao.mapper.GroupMapper;
 import com.yang.shortlink.admin.dto.req.GroupSaveReqDTO;
+import com.yang.shortlink.admin.dto.req.GroupSortReqDTO;
 import com.yang.shortlink.admin.dto.req.GroupUpdateReqDTO;
 import com.yang.shortlink.admin.dto.resp.GroupListRespDTO;
 import com.yang.shortlink.admin.service.GroupService;
@@ -42,14 +43,6 @@ public class GroupServiceImpl extends ServiceImpl<GroupMapper, GroupDO> implemen
         baseMapper.insert(groupDO);
     }
 
-    private boolean hasGroup(String gid) {
-        LambdaQueryWrapper<GroupDO> queryWrapper = Wrappers.lambdaQuery(GroupDO.class)
-                .eq(GroupDO::getGid, gid)
-                .eq(GroupDO::getUsername, UserContext.getUsername());
-        GroupDO groupDO = baseMapper.selectOne(queryWrapper);
-        return  groupDO != null;
-    }
-
     @Override
     public List<GroupListRespDTO> listGroup() {
         LambdaQueryWrapper<GroupDO> queryWrapper = Wrappers.lambdaQuery(GroupDO.class)
@@ -78,5 +71,28 @@ public class GroupServiceImpl extends ServiceImpl<GroupMapper, GroupDO> implemen
                 .eq(GroupDO::getUsername, UserContext.getUsername())
                 .eq(GroupDO::getDelFlag, "0");
         baseMapper.delete(updateWrapper);
+    }
+
+    @Override
+    public void sortGroup(List<GroupSortReqDTO> requestParam) {
+        requestParam.forEach(item->{
+            LambdaUpdateWrapper<GroupDO> updateWrapper = Wrappers.lambdaUpdate(GroupDO.class)
+                    .eq(GroupDO::getGid, item.getGid())
+                    .eq(GroupDO::getUsername, UserContext.getUsername())
+                    .eq(GroupDO::getDelFlag, 0);
+            GroupDO groupDO = GroupDO.builder()
+                    .sortOrder(item.getSortOrder())
+                    .build();
+            baseMapper.update(groupDO, updateWrapper);
+        });
+
+    }
+
+    private boolean hasGroup(String gid) {
+        LambdaQueryWrapper<GroupDO> queryWrapper = Wrappers.lambdaQuery(GroupDO.class)
+                .eq(GroupDO::getGid, gid)
+                .eq(GroupDO::getUsername, UserContext.getUsername());
+        GroupDO groupDO = baseMapper.selectOne(queryWrapper);
+        return  groupDO != null;
     }
 }

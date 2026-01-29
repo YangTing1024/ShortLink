@@ -3,6 +3,7 @@ package com.yang.shortlink.admin.controller;
 import com.yang.shortlink.admin.common.convention.Result;
 import com.yang.shortlink.admin.common.convention.Results;
 import com.yang.shortlink.admin.dto.req.GroupSaveReqDTO;
+import com.yang.shortlink.admin.dto.req.GroupSortReqDTO;
 import com.yang.shortlink.admin.dto.req.GroupUpdateReqDTO;
 import com.yang.shortlink.admin.dto.resp.GroupListRespDTO;
 import com.yang.shortlink.admin.service.GroupService;
@@ -56,6 +57,15 @@ public class GroupController {
     @DeleteMapping("/{gid}")
     public Result<Void> deleteGroup(@PathVariable("gid") String gid) {
         groupService.deleteGroup(gid);
+        return Results.success();
+    }
+
+    /**
+     * 排序短链接分组
+     */
+    @PutMapping("/sort")
+    public Result<Void> sortGroup(@RequestBody List<GroupSortReqDTO> requestParam) {
+        groupService.sortGroup(requestParam);
         return Results.success();
     }
 }
