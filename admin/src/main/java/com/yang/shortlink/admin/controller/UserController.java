@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
  * @since 2026/1/18 22:34
  */
 @RestController
-@RequestMapping("/api/shortLink/v1/user")
+@RequestMapping("/api/shortLink/admin/v1/user")
 @RequiredArgsConstructor
 public class UserController {
 

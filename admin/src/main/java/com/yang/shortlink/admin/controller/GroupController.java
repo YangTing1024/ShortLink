@@ -19,7 +19,7 @@ import java.util.List;
  * @since 2026/1/26 21:26
  */
 @RestController
-@RequestMapping("/api/shortLink/v1/group")
+@RequestMapping("/api/shortLink/admin/v1/group")
 @RequiredArgsConstructor
 public class GroupController {
 
