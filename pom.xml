@@ -8,6 +8,15 @@
     <artifactId>ShortLink</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
+
+    <developers>
+        <developer>
+            <name>YangTing</name>
+            <email>18259295592@163.com</email>
+            <url>https://github.com/YangTing1024</url>
+        </developer>
+    </developers>
+
     <modules>
         <module>admin</module>
         <module>project</module>
