@@ -1,6 +1,13 @@
 package com.yang.shortlink.project.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import com.yang.shortlink.project.common.convention.Result;
+import com.yang.shortlink.project.common.convention.Results;
+import com.yang.shortlink.project.dto.req.ShortLinkCreateReqDTO;
+import com.yang.shortlink.project.dto.resp.ShortLinkCreateRespDTO;
+import com.yang.shortlink.project.service.ShortLinkService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,12 +18,18 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2026/2/2 10:41
  */
 @RestController
-@RequestMapping("/api/shortLink/project/v1")
+@RequiredArgsConstructor
+@RequestMapping("/api/shortLink/v1")
 public class ShortLinkController {
 
-    @GetMapping("/test")
-    public String test(){
-        return "hello world";
+    private final ShortLinkService shortLinkService;
+
+    /**
+     * 创建短链接
+     */
+    @PostMapping
+    public Result<ShortLinkCreateRespDTO> createShortLink(@RequestBody ShortLinkCreateReqDTO requestParam){
+        return Results.success(shortLinkService.create(requestParam));
     }
 
 }

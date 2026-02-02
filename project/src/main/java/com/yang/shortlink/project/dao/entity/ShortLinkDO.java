@@ -1,5 +1,6 @@
 package com.yang.shortlink.project.dao.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.yang.shortlink.project.common.database.BaseDO;
 import lombok.Data;
@@ -81,5 +82,6 @@ public class ShortLinkDO extends BaseDO implements Serializable {
     /**
      * 描述
      */
+    @TableField("`describe`")
     private String describe;
 }
